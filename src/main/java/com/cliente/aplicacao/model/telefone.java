@@ -10,6 +10,6 @@ public class telefone {
     @JsonIgnoreProperties("telefone")
     private Cliente cliente;
     private long id;
-    private String numero;
-    private String ddd;
+    private int numero;
+    private int ddd;
 }
