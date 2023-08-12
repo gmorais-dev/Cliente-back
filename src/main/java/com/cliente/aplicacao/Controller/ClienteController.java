@@ -13,7 +13,8 @@ import java.util.List;
 public class ClienteController {
     @RestController
     @RequestMapping("/clientes")
-    public  class ClienteController {
+    public  class ClienteController { 
+
 
         @Autowired
         private ClienteRepository clienteRepository;
@@ -26,9 +27,29 @@ public class ClienteController {
         } else if (nome != null) {
             return clienteRepository.findByNome(nome);
         } else if (ativo) {
-            return clienteRepository.findByAtivo(true);
+            return clienteRepository.findByAtivo(ativo);
         } else {
             return clienteRepository.findAll();
         }
     }
+    @postmapping 
+    public Cliente cadastrarCliente(@RequestBody Cliente cliente) {
+        if (clienteRepository.findByCpfCnpj(cliente.getCpfCnpj()) != null) {
+            throw new IllegalArgumentException("Já existe um cliente cadastrado com o CPF/CNPJ informado");
+        }
+        return clienteRepository.save(cliente);
+    }
+    @putmapping 
+     public Cliente atualizarCliente(@PathVariable Long id, @RequestBody Cliente clienteAtualizado) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado com o ID: " + id));
+        cliente.setNome(clienteAtualizado.getNome());
+        cliente.setTipo(clienteAtualizado.getTipo());
+        cliente.setCpfCnpj(clienteAtualizado.getCpfCnpj());
+        cliente.setRgIe(clienteAtualizado.getRg());
+        cliente.setDataCadastro(clienteAtualizado.getDataCadastro());
+        cliente.setAtivo(clienteAtualizado.isAtivo());
+        cliente.setTelefones(clienteAtualizado.getTelef
+
+
 }
