@@ -49,7 +49,21 @@ public class ClienteController {
         cliente.setRgIe(clienteAtualizado.getRg());
         cliente.setDataCadastro(clienteAtualizado.getDataCadastro());
         cliente.setAtivo(clienteAtualizado.isAtivo());
-        cliente.setTelefones(clienteAtualizado.getTelef
+        cliente.setTelefones(clienteAtualizado.getTelef());
+
+        }
+        
+        
+@DeleteMapping("/{id}")
+    public void deletarCliente(@PathVariable Long id) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado com o ID: " + id));
+
+        clienteRepository.delete(cliente);
+
+
+
+        
 
 
 }
