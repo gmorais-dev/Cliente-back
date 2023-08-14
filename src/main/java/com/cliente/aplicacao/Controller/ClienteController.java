@@ -8,14 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import java.util.List;
 
-public class ClienteController {
+
+
+
+public class ClienteController 
     @RestController
     @RequestMapping("/clientes")
     public  class ClienteController { 
 
-
+         
         @Autowired
         private ClienteRepository clienteRepository;
     }
@@ -56,7 +60,7 @@ public class ClienteController {
         
 @DeleteMapping("/{id}")
     public void deletarCliente(@PathVariable Long id) {
-        Cliente cliente = clienteRepository.findById(id)
+        Cliente cliente = clienteRepository.findById(id);
                 .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado com o ID: " + id));
 
         clienteRepository.delete(cliente);
